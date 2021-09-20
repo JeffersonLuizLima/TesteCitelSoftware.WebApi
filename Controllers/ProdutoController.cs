@@ -44,8 +44,10 @@ namespace TesteCitelSoftware.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult Cadastro()
+        public async Task<ActionResult> Cadastro()
         {
+            await CreateCategoriaViewBag();
+
             return View();
         }
 
@@ -73,6 +75,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                     ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
                 }
             }
+            await CreateCategoriaViewBag();
             return View(produto);
         }
 
@@ -96,6 +99,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 if (responseTask.IsSuccessStatusCode)
                 {
                     produto = await responseTask.Content.ReadAsAsync<ProdutoViewModel>();
+                    await CreateCategoriaViewBag();
                 }
             }
             return View(produto);
@@ -123,6 +127,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                     ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
                 }
             }
+            await CreateCategoriaViewBag();
             return View(produto);
         }
 
@@ -146,6 +151,25 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 }
             }
             throw new HttpException();
+        }
+
+        private async Task CreateCategoriaViewBag()
+        {
+            IEnumerable<CategoriaViewModel> categorias = null;
+
+            using (var catego = new HttpClient())
+            {
+                catego.BaseAddress = new Uri(URL_BASE);
+                catego.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (string)(Session["token"] ?? string.Empty));
+
+                var result = await catego.GetAsync("categorias");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    categorias = await result.Content.ReadAsAsync<IList<CategoriaViewModel>>();
+                    ViewBag.categorias = categorias;
+                }
+            }
         }
     }
 }
