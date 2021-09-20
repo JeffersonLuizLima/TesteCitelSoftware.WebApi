@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TesteCitelSoftware.WebApi.Models.CategoriaViewModel>
+
+@{
+    ViewBag.Title = "Categoria";
+}
+
+<h2>Consulta de Categorias</h2>
+
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Geral/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Geral/css/main.css">
+<!--===============================================================================================-->
+
+<body>
+    <p>
+        @Html.ActionLink("Nova Categoria", "Cadastro", new { }, new { @class = "btn btn-sm btn-primary pull-right m-b-2" })
+    </p>
+    <div class="container-table100">
+        <div class="wrap-table100">
+
+            <div class="table100 ver1 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1">
+                                    @Html.DisplayNameFor(model => model.Descricao)
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="table100-body js-pscroll">
+
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">
+                                        @Html.DisplayFor(modelItem => item.Descricao)
+                                    </td>
+                                    <td class="cell100 column1">
+                                        @Html.ActionLink("Editar", "Alterar", new { id = item.Id }, new { @class = "btn btn-sm btn-success" }) |
+                                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" }) |
+                                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="~/Geral/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Geral/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+
+
+    </script>
+</body>
