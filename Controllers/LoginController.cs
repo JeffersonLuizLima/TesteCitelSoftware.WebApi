@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -48,6 +49,31 @@ namespace TesteMazzaFC.WebApi.Controllers
         public ActionResult Registrar()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Registrar(RegisterUserViewModel register)
+        {
+            if (register == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (ModelState.IsValid)
+            {
+                using (var regis= new HttpClient())
+                {
+                    regis.BaseAddress = new Uri(URL_BASE);
+
+                    var result = await regis.PostAsJsonAsync("registrar", register);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    var error = await result.Content.ReadAsAsync<MenssagensViewModel>();
+                    ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
+                }
+            }
+            return View(register);
         }
     }
 }

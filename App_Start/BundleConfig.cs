@@ -20,11 +20,15 @@ namespace TesteCitelSoftware.WebApi
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/vendor/perfect-scrollbar/perfect-scrollbar.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/login.css",
+                      "~/Content/main.css",
+                      "~/Content/perfect-scrollbar.css"));
         }
     }
 }

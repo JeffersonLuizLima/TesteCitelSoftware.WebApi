@@ -1,65 +1,119 @@
 ﻿@model TesteCitelSoftware.WebApi.Models.ProdutoViewModel
 
 @{
-    ViewBag.Title = "Alterar";
+    ViewBag.Title = "Alterar Produto";
 }
 
-<h2>Alterar</h2>
+<h2>Alterar Cadastro de Produto</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ProdutoViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Dados do Produto</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Descricao, 5, 100, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="panel-body">
+                    <div class="form-group">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="col-md-11 control-label">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <p class="help-block"><h11>*</h11> Campo Obrigatório </p>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Categoria.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(f => f.CategoriaId, new SelectList(ViewBag.categorias, "Id", "Descricao"), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoriaId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label class="texto">Nome</label>
+                                <span class="Obrigatorio" data-toggle="tooltip" data-placement="right" title="Campo Obrigatório">*</span>
+                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control input-md", placeholder = "Nome do produto" } })
+                                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label class="texto">Valor</label>
+                                <span class="Obrigatorio" data-toggle="tooltip" data-placement="right" title="Campo Obrigatório">*</span>
+                                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control input-md", placeholder = "R$" } })
+                                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="texto">Categoria</label>
+                                <span class="Obrigatorio" data-toggle="tooltip" data-placement="right" title="Campo Obrigatório">*</span>
+                                @Html.DropDownListFor(f => f.CategoriaId, new SelectList(ViewBag.categorias, "Id", "Descricao"), new { @class = "form-control input-md" })
+                                @Html.ValidationMessageFor(model => model.CategoriaId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <label class="texto">Descrição</label>
+                                @Html.TextAreaFor(model => model.Descricao, 5, 100, new { @class = "form-control input-md" })
+                                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <button id="Alterar" name="Alterar" class="btn btn-success" type="Submit">Alterar</button>
+                                @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
-        </div>
-    </div>
+        </fieldset>
+    </form>
+
+    @*<div class="form-horizontal">
+            <h4>ProdutoViewModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Descricao, 5, 100, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Categoria.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(f => f.CategoriaId, new SelectList(ViewBag.categorias, "Id", "Descricao"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoriaId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

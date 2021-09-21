@@ -1,43 +1,59 @@
 ﻿@model TesteCitelSoftware.WebApi.Models.LoginUserViewModel
 
+
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Entre com seus dados corretamente para acessar o sistema.</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <body>
+        <div class="container">
+            <a class="links" id="paracadastro"></a>
+            <a class="links" id="paralogin"></a>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Entar" class="btn btn-default" />
-        </div>
-    </div>
+            <div class="content">
+                <!--FORMULÁRIO DE LOGIN-->
+                <div id="login">
+                    <form method="post" action="Index">
+                        <h1>Login</h1>
 
-    <p>
-       Ainda não tem conta? @Html.ActionLink("Cadastre-se", "Registrar", new { }, new { @class = "btn btn-sm btn-primary pull-left m-b-2" })
-    </p>
-</div>
+                        <label for="email_login">Seu e-mail</label>
+                        <p>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "teste@teste.com" } })<br />
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </p>
+
+                        <label for="senha_login">Sua senha</label>
+                        <p>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Teste@123", type = "password" } })<br />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
+                            <label for="manterlogado">Manter-me logado</label>
+                        </p>
+
+                        <p>
+                            <input type="submit" value="Entar" />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </p>
+
+                        <p class="link">
+                            Ainda não tem conta?
+                            @Html.ActionLink("Cadastre-se", "Registrar")
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

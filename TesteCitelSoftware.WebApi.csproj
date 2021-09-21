@@ -144,11 +144,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Geral\css\main.css" />
-    <Content Include="Geral\js\main.js" />
-    <Content Include="Geral\vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="Geral\vendor\perfect-scrollbar\perfect-scrollbar.css" />
-    <Content Include="Geral\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Content\perfect-scrollbar.css" />
+    <Content Include="Scripts\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />

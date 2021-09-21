@@ -15,6 +15,7 @@ namespace TesteCitelSoftware.WebApi.Models
         public string Password { get; set; }
 
         [Display(Name = "Confirmar")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [Compare("Password", ErrorMessage = "As senhas não conferem.")]
         public string ConfirmPassword { get; set; }
     }
