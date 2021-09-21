@@ -128,6 +128,31 @@ namespace TesteCitelSoftware.WebApi.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            CategoriaViewModel categoria = null;
+
+            using (var cat = new HttpClient())
+            {
+                cat.BaseAddress = new Uri($"{URL_BASE}categorias/{id}");
+                cat.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (string)(Session["token"] ?? string.Empty));
+
+                var responseTask = await cat.GetAsync("");
+
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    categoria = await responseTask.Content.ReadAsAsync<CategoriaViewModel>();
+                }
+            }
+            return View(categoria);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Delete(int? id)
         {
 
