@@ -11,7 +11,7 @@ using TesteCitelSoftware.WebApi.Models;
 
 namespace TesteCitelSoftware.WebApi.Controllers
 {
-    
+
     public class CategoriaController : Controller
     {
         const string URL_BASE = "https://localhost:44308/api/v2/";
@@ -42,7 +42,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 }
 
             }
-                return View(categorias);
+            return View(categorias);
         }
 
         [HttpGet]
@@ -130,6 +130,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -145,8 +146,28 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 {
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    var error = await responseTask.Content.ReadAsAsync<MenssagensViewModel>();
+                    ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
+
+                    return View("Index", await CarregarCategoria());
+                }
             }
-            throw new HttpException();
+        }
+        private async Task<IEnumerable<CategoriaViewModel>> CarregarCategoria()
+        {
+            IEnumerable<CategoriaViewModel> categorias = null;
+            using (var catego = new HttpClient())
+            {
+                catego.BaseAddress = new Uri(URL_BASE);
+                catego.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (string)(Session["token"] ?? string.Empty));
+
+                var result = await catego.GetAsync("categorias");
+
+                categorias = await result.Content.ReadAsAsync<IList<CategoriaViewModel>>();
+            }
+            return categorias;
         }
     }
 }

@@ -132,6 +132,32 @@ namespace TesteCitelSoftware.WebApi.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ProdutoViewModel produto = null;
+
+            using (var prod = new HttpClient())
+            {
+                prod.BaseAddress = new Uri($"{URL_BASE}produtos/{id}");
+                prod.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (string)(Session["token"] ?? string.Empty));
+
+                var responseTask = await prod.GetAsync("");
+
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    produto = await responseTask.Content.ReadAsAsync<ProdutoViewModel>();
+                    await CreateCategoriaViewBag();
+                }
+            }
+            return View(produto);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

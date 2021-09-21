@@ -4,7 +4,7 @@
     ViewBag.Title = "Categoria";
 }
 
-<h2>Consulta de Categorias</h2>
+<h3>Consulta de Categorias</h3>
 
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="~/Geral/vendor/perfect-scrollbar/perfect-scrollbar.css">
@@ -14,11 +14,11 @@
 
 <body>
     <p>
-        @Html.ActionLink("Nova Categoria", "Cadastro", new { }, new { @class = "btn btn-sm btn-primary pull-right m-b-2" })
+        @Html.ActionLink("Nova Categoria", "Cadastro", new { }, new { @class = "btn btn-sm btn-primary pull-left m-b-2" })
     </p>
     <div class="container-table100">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="wrap-table100">
-
             <div class="table100 ver1 m-b-110">
                 <div class="table100-head">
                     <table>
@@ -27,6 +27,9 @@
                                 <th class="cell100 column1">
                                     @Html.DisplayNameFor(model => model.Descricao)
                                 </th>
+                                <th class="cell100 column2">
+
+                                </th>
                             </tr>
                         </thead>
                     </table>
@@ -34,7 +37,7 @@
 
                 <div class="table100-body js-pscroll" style="height:300px">
 
-                    <table >
+                    <table>
                         <tbody>
                             @foreach (var item in Model)
                             {
@@ -42,7 +45,7 @@
                                     <td class="cell100 column1">
                                         @Html.DisplayFor(modelItem => item.Descricao)
                                     </td>
-                                    <td class="cell100 column1">
+                                    <td class="cell100 column2">
                                         @Html.ActionLink("Editar", "Alterar", new { id = item.Id }, new { @class = "btn btn-sm btn-success" }) |
                                         @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" }) |
                                         @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
