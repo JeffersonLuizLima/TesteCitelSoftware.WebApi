@@ -197,13 +197,13 @@ th, td {
 }
 
 .table100-head th {
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .table100-body td {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 /*==================================================================

@@ -126,13 +126,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriaViewModel.cs" />
-    <Compile Include="Models\ErroViewModel.cs" />
+    <Compile Include="Models\MenssagensViewModel.cs" />
     <Compile Include="Models\ProdutoViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +184,8 @@
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Produto\Cadastro.cshtml" />
     <Content Include="Views\Produto\Alterar.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Registrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,7 +13,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
 {
     public class ProdutoController : Controller
     {
-        const string URL_BASE = "https://localhost:44308/api/v1/";
+        const string URL_BASE = "https://localhost:44308/api/v2/";
 
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -71,7 +71,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-                    var error = await result.Content.ReadAsAsync<ErroViewModel>();
+                    var error = await result.Content.ReadAsAsync<MenssagensViewModel>();
                     ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
                 }
             }
@@ -123,7 +123,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 if (result.IsSuccessStatusCode) return RedirectToAction("Index");
                 else
                 {
-                    var error = await result.Content.ReadAsAsync<ErroViewModel>();
+                    var error = await result.Content.ReadAsAsync<MenssagensViewModel>();
                     ModelState.AddModelError(string.Empty, error.Errors.FirstOrDefault());
                 }
             }
