@@ -36,11 +36,18 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 {
                     if (result.ReasonPhrase == "Unauthorized")
                     {
-                        return View("Error");
+                        return View("Unauthorized");
                     }
                 }
             }
             return View(produtos);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Pesquisar(string nome)
+        {
+            IEnumerable<ProdutoViewModel> produtos = null;
+            return View("Index");
         }
 
         [HttpGet]

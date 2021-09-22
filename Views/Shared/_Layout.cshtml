@@ -20,24 +20,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("Produto", "Index", "Produto")</li>
                     <li class="nav-item">@Html.ActionLink("Categoria", "Index", "Categoria")</li>
+                    <li class="nav-item">@Html.ActionLink("Produto", "Index", "Produto")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li style="text-align: right">@Html.ActionLink("Log in", "Index", "Login")</li>
+                    <li style="text-align: right" class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Teste Citel Software</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

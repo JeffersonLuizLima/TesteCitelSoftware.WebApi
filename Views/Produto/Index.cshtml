@@ -4,68 +4,102 @@
     ViewBag.Title = "Produto";
 }
 
-<h3>Consulta de Produtos</h3>
-
-
 <body>
-    <p>
-        @Html.ActionLink("Novo Produto", "Cadastro", new { }, new { @class = "btn btn-sm btn-primary pull-left m-b-2" })
-    </p>
-    <div class="container-table100">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="wrap-table100">
-            <div class="table100 ver1 m-b-110">
-                <div class="table100-head">
-                    <table>
-                        <thead>
-                            <tr class="row100 head">
-                                <th class="cell100 column1">
-                                    @Html.DisplayNameFor(model => model.Nome)
-                                </th>
-                                <th class="cell100 column2">
-                                    @Html.DisplayNameFor(model => model.Valor)
-                                </th>
-                                <th class="cell100 column3">
-                                    @Html.DisplayNameFor(model => model.Categoria.Descricao)
-                                </th>
-                                <th class="cell100 column4">
-                                    
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
 
-                <div class="table100-body js-pscroll" style="height:300px">
+    @using (Html.BeginForm())
+    {
 
-                    <table>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="row100 body">
-                                    <td class="cell100 column1">
-                                        @Html.DisplayFor(modelItem => item.Nome)
-                                    </td>
-                                    <td class="cell100 column2">
-                                        @Html.DisplayFor(modelItem => item.Valor)
-                                    </td>
-                                    <td class="cell100 column3">
-                                        @Html.DisplayFor(modelItem => item.Categoria.Descricao)
-                                    </td>
-                                    <td class="cell100 column4">
-                                        @Html.ActionLink("Editar", "Alterar", new { id = item.Id }, new { @class = "btn btn-sm btn-success" }) |
-                                        @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" }) |
-                                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+        <fieldset>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Pesquisar Produtos</div>
+
+                <div class="panel-body">
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="texto">Nome</label>
+                                <input id="idNome" type="text" class="form-control input-md" placeholder = "Digite o nome do produto" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="texto">Categoria</label>
+                                <select id="Categoria" class="form-control form-control-sm">
+                                    <option selected disabled value="">...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-8">
+                                @Html.ActionLink("Novo Produto", "Cadastro", new { }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Pesquisar", "Pesquisar", new { nome = "" }, new { @class = "btn btn-success disabled" })
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </div>
 
+            <div class="container-table100">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="wrap-table100">
+                    <div class="table100 ver1 m-b-110">
+                        <div class="table100-head">
+                            <table>
+                                <thead>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">
+                                            @Html.DisplayNameFor(model => model.Nome)
+                                        </th>
+                                        <th class="cell100 column2">
+                                            @Html.DisplayNameFor(model => model.Valor)
+                                        </th>
+                                        <th class="cell100 column3">
+                                            @Html.DisplayNameFor(model => model.Categoria.Descricao)
+                                        </th>
+                                        <th class="cell100 column4">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="table100-body js-pscroll" style="height:260px">
+
+                            <table>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="row100 body">
+                                            <td class="cell100 column1">
+                                                @Html.DisplayFor(modelItem => item.Nome)
+                                            </td>
+                                            <td class="cell100 column2">
+                                                @Html.DisplayFor(modelItem => item.Valor)
+                                            </td>
+                                            <td class="cell100 column3">
+                                                @Html.DisplayFor(modelItem => item.Categoria.Descricao)
+                                            </td>
+                                            <td class="cell100 column4">
+                                                @Html.ActionLink("Editar", "Alterar", new { id = item.Id }, new { @class = "btn btn-sm btn-success" }) |
+                                                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" }) |
+                                                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
     <script>
         $('.js-pscroll').each(function () {
             var ps = new PerfectScrollbar(this);

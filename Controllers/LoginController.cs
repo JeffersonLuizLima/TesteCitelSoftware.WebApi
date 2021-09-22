@@ -34,7 +34,7 @@ namespace TesteMazzaFC.WebApi.Controllers
                     var dados = await result.Content.ReadAsAsync<LoginResponseViewModel>();
                     Session["token"] = dados.AccessToken;
 
-                    return RedirectToAction("../Produto/Index");
+                    return RedirectToAction("../Home/Index");
                 }
                 else
                 {

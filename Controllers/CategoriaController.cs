@@ -37,7 +37,7 @@ namespace TesteCitelSoftware.WebApi.Controllers
                 {
                     if (result.ReasonPhrase == "Unauthorized")
                     {
-                        return View("Error");
+                        return View("Unauthorized");
                     }
                 }
 
